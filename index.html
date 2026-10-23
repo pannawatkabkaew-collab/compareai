@@ -1,93 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CompareAI — ช้อปให้คุ้มกว่า</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CompareAI — เปรียบเทียบสินค้าก่อนซื้อ</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f6f7fb;color:#111827}
-header{background:#fff;border-bottom:1px solid #e5e7eb;padding:16px 6%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:22px;font-weight:800}.logo span{color:#6366f1}
-nav{display:flex;gap:22px;color:#6b7280;font-size:14px}
-.hero{padding:72px 6% 52px;text-align:center;background:linear-gradient(180deg,#fff,#f6f7fb)}
-.hero h1{font-size:clamp(34px,6vw,62px);margin:0 0 16px;letter-spacing:-2px}.hero h1 span{color:#6366f1}
-.hero p{color:#6b7280;font-size:18px;margin:0 auto 28px;max-width:650px}
-.search{max-width:760px;margin:auto;background:#fff;border:1px solid #dfe3ea;border-radius:18px;padding:8px;display:flex;box-shadow:0 12px 35px rgba(31,41,55,.08)}
-.search input{flex:1;border:0;outline:0;padding:16px;font-size:16px}.search button{border:0;background:#6366f1;color:white;border-radius:13px;padding:0 25px;font-weight:700;cursor:pointer}
-.chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}.chip{background:#fff;border:1px solid #e5e7eb;padding:8px 13px;border-radius:999px;font-size:13px;cursor:pointer}
-main{max-width:1180px;margin:0 auto;padding:35px 6% 70px}.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}.section-title h2{margin:0;font-size:24px}.muted{color:#6b7280;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid #e7e9ee;border-radius:18px;padding:18px;position:relative}.badge{position:absolute;top:15px;left:15px;background:#111827;color:#fff;padding:6px 9px;border-radius:8px;font-size:11px}.product-img{height:180px;border-radius:14px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:58px;margin-bottom:16px}.card h3{margin:0 0 7px;font-size:17px}.stars{font-size:13px;margin-bottom:12px}.price{font-size:25px;font-weight:800}.shop{font-size:12px;color:#6b7280;margin:3px 0 15px}.compare{display:flex;justify-content:space-between;border-top:1px solid #eee;padding-top:12px;font-size:13px}.good{color:#16a34a;font-weight:700}.btn{width:100%;margin-top:15px;padding:11px;border:0;border-radius:11px;background:#111827;color:#fff;font-weight:700;cursor:pointer}
-.ai{margin-top:35px;background:#111827;color:#fff;border-radius:22px;padding:26px}.ai h2{margin-top:0}.ai p{color:#d1d5db;line-height:1.7}.ai strong{color:#a5b4fc}
-footer{text-align:center;color:#9ca3af;padding:30px;font-size:13px}
-@media(max-width:800px){nav{display:none}.grid{grid-template-columns:1fr}.hero{padding-top:45px}.search{flex-direction:column}.search button{height:50px}}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f7fb;color:#111827}
+header{background:#111827;color:white;padding:18px 20px}.nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center}.logo{font-size:23px;font-weight:800}.beta{font-size:12px;background:#374151;padding:6px 10px;border-radius:20px}
+.hero{background:linear-gradient(135deg,#111827,#334155);color:white;padding:52px 18px 62px}.heroIn{max-width:900px;margin:auto;text-align:center}.hero h1{font-size:clamp(30px,6vw,54px);margin:0 0 12px}.hero p{color:#d1d5db}.search{display:flex;background:white;padding:7px;border-radius:16px;box-shadow:0 15px 35px #0004}.search input{flex:1;border:0;outline:0;padding:14px;font-size:16px;min-width:0}.search button{border:0;background:#111827;color:white;border-radius:11px;padding:0 22px;font-weight:700}.chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:15px}.chips button{border:1px solid #ffffff40;background:#ffffff12;color:white;border-radius:99px;padding:8px 12px}
+main{max-width:1100px;margin:28px auto;padding:0 16px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.top h2{margin:0}.sort{padding:9px;border:1px solid #ddd;border-radius:10px;background:white}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:17px}.card{background:white;border:1px solid #e5e7eb;border-radius:18px;overflow:hidden;box-shadow:0 5px 18px #00000009}.photo{height:205px;background:#f1f5f9;display:flex;align-items:center;justify-content:center}.photo img{width:100%;height:100%;object-fit:contain}.body{padding:16px}.tag{display:inline-block;background:#eef2ff;color:#4338ca;padding:5px 8px;border-radius:99px;font-size:12px}.card h3{margin:9px 0 4px}.store{font-size:13px;color:#6b7280}.price{font-size:23px;font-weight:800;margin-top:10px}.score{margin:7px 0;font-weight:700}.why{background:#f8fafc;padding:10px;border-radius:11px;font-size:13px;color:#475569}.buttons{display:flex;gap:8px;margin-top:12px}.buttons button{flex:1;border:0;border-radius:10px;padding:10px;font-weight:700}.compare{background:#111827;color:white}.shop{background:#e5e7eb}.ai{margin-top:25px;background:#111827;color:white;border-radius:20px;padding:20px}.ai p{color:#d1d5db}.empty{background:white;padding:40px;text-align:center;border-radius:18px;border:1px dashed #cbd5e1}.foot{text-align:center;color:#64748b;font-size:12px;padding:35px 15px}
+@media(max-width:520px){.search button{padding:0 14px}.top{align-items:flex-start;gap:10px;flex-direction:column}}
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">Compare<span>AI</span></div>
-  <nav><span>เปรียบเทียบราคา</span><span>หมวดหมู่</span><span>วิธีใช้</span></nav>
-</header>
+<header><div class="nav"><div class="logo">CompareAI</div><div class="beta">BETA</div></div></header>
 
-<section class="hero">
-  <h1>ซื้อของให้ <span>คุ้มกว่า</span></h1>
-  <p>บอกสิ่งที่คุณกำลังหา แล้ว CompareAI ช่วยเปรียบเทียบราคา สเปก และความคุ้มค่าให้ในที่เดียว</p>
-  <div class="search">
-    <input id="query" placeholder="เช่น มือถือถ่ายรูปดี งบไม่เกิน 10,000 บาท">
-    <button onclick="search()">ค้นหา</button>
-  </div>
-  <div class="chips">
-    <button class="chip" onclick="fill('หูฟังเล่นเกม งบ 2,000 บาท')">🎧 หูฟังเกม</button>
-    <button class="chip" onclick="fill('มือถือ งบ 10,000 บาท')">📱 มือถือ</button>
-    <button class="chip" onclick="fill('โน้ตบุ๊ก งบ 25,000 บาท')">💻 โน้ตบุ๊ก</button>
-  </div>
-</section>
+<section class="hero"><div class="heroIn">
+<h1>เลือกของให้คุ้มกว่า</h1>
+<p>ค้นหา เปรียบเทียบ และดูตัวเลือกที่น่าสนใจก่อนตัดสินใจซื้อ</p>
+<div class="search"><input id="q" placeholder="เช่น หูฟังเกมมิ่ง งบ 1,500"><button onclick="search()">ค้นหา</button></div>
+<div class="chips">
+<button onclick="quick('มือถือ')">📱 มือถือ</button>
+<button onclick="quick('หูฟัง')">🎧 หูฟัง</button>
+<button onclick="quick('เกมมิ่ง')">🎮 เกมมิ่ง</button>
+</div>
+</div></section>
 
 <main>
-  <div class="section-title">
-    <div><h2 id="resultTitle">สินค้าที่น่าสนใจ</h2><div class="muted">ตัวอย่างข้อมูลสำหรับต้นแบบ</div></div>
-    <div class="muted">อัปเดตล่าสุด: วันนี้</div>
-  </div>
-
-  <div class="grid" id="products"></div>
-
-  <section class="ai">
-    <h2>🤖 AI ช่วยตัดสินใจ</h2>
-    <p id="aiText"><strong>ตัวเลือกที่คุ้มที่สุด:</strong> สินค้า A เพราะสมดุลระหว่างราคา คะแนนรีวิว และฟีเจอร์ได้ดีที่สุด หากไม่ได้ต้องการฟีเจอร์ระดับสูงสุด การเลือกตัวนี้จะประหยัดงบกว่า</p>
-  </section>
+<div class="top"><h2 id="title">สินค้าแนะนำ</h2><select class="sort" id="sort" onchange="render()"><option value="score">แนะนำ</option><option value="low">ราคาต่ำ → สูง</option><option value="high">ราคาสูง → ต่ำ</option></select></div>
+<div id="results" class="grid"></div>
+<div class="ai"><b>🤖 CompareAI วิเคราะห์</b><p id="aitext">พิมพ์สิ่งที่ต้องการ เช่น “หูฟังเกมมิ่ง งบ 1,500” เพื่อให้ระบบคัดตัวเลือกให้</p></div>
 </main>
-
-<footer>CompareAI Prototype • ระบบเปรียบเทียบสินค้าเวอร์ชันทดลอง</footer>
+<div class="foot">CompareAI Prototype • รูปและข้อมูลใช้สำหรับเดโม ควรตรวจสอบราคาและสต็อกกับร้านค้าก่อนซื้อ</div>
 
 <script>
-const data=[
- {emoji:"🎧",name:"LOGITECH G335 Gaming Headset",price:"฿1,290",shop:"Makro PRO",score:"5.0",tag:"คุ้มงบ",spec:"หูฟังเกมมิ่ง • มีสาย",good:"เหมาะกับเกม"},
- {emoji:"🎧",name:"Razer Kraken V3 X",price:"฿1,690",shop:"Gear Gadget Tech",score:"3.0",tag:"เกมมิ่ง",spec:"Gaming Headset • มีสาย",good:"งบกลาง"},
- {emoji:"🎧",name:"Logitech G435 LIGHTSPEED",price:"฿1,770",shop:"Iris Technology",score:"5.0",tag:"ไร้สาย",spec:"Wireless • Bluetooth",good:"ใช้งานหลายแบบ"},
- {emoji:"📱",name:"vivo Y11d (4+128GB)",price:"฿6,199",shop:"Banana Online",score:"—",tag:"มือถือ",spec:"4GB + 128GB",good:"งบไม่เกิน 10k"},
- {emoji:"📱",name:"TECNO Spark 40 5G",price:"฿6,250",shop:"Shopee",score:"4.2",tag:"5G",spec:"8GB + 256GB",good:"คุ้มสเปก"},
- {emoji:"📱",name:"TECNO POVA 7 5G",price:"฿7,080",shop:"SuperTstore",score:"4.7",tag:"เกม",spec:"5G • 8GB + 256GB",good:"เหมาะกับเกม"}
+const products=[
+{name:"Logitech G335",cat:"หูฟัง",price:1190,score:9.1,store:"JIB",img:"https://media.ldlc.com/r1600/ld/products/00/05/86/86/LD0005868678_1.jpg",tags:"หูฟัง เกมมิ่ง",why:"น้ำหนักเบาและเหมาะกับการเล่นเกม มีไมค์ในตัว"},
+{name:"Razer Kraken V3 X",cat:"หูฟัง",price:1690,score:8.5,store:"Gaming Store",img:"https://image.citycenter.jo/cache/catalog/002023/122023/750300-1200x1200.jpg",tags:"หูฟัง เกมมิ่ง",why:"เหมาะกับสายเกมที่ต้องการเสียงและไมค์สำหรับคุยทีม"},
+{name:"Logitech G435 LIGHTSPEED",cat:"หูฟัง",price:1770,score:9.0,store:"Iris Technology",img:"https://api.technodom.kz/f3/api/v1/images/800/800/257561_6.jpg",tags:"หูฟัง ไร้สาย เกมมิ่ง",why:"จุดเด่นคือการเชื่อมต่อไร้สายและน้ำหนักเบา"},
+{name:"vivo Y11d",cat:"มือถือ",price:6199,score:8.7,store:"Banana Online",img:"https://down-th.img.susercontent.com/file/th-11134207-81ztk-mnmid8z65qme74",tags:"มือถือ กล้อง แบต",why:"เหมาะกับการใช้งานทั่วไปและคนที่ต้องการแบตเตอรี่ความจุสูง"},
+{name:"TECNO Spark 40 5G",cat:"มือถือ",price:6250,score:8.9,store:"Shopee",img:"https://via.placeholder.com/600x450?text=TECNO+Spark+40+5G",tags:"มือถือ 5G เกม",why:"น่าสนใจสำหรับคนที่ต้องการ 5G ในงบระดับกลาง"},
+{name:"TECNO POVA 7 5G",cat:"เกมมิ่ง",price:7080,score:9.2,store:"SuperTstore",img:"https://via.placeholder.com/600x450?text=TECNO+POVA+7+5G",tags:"มือถือ เกมมิ่ง 5G",why:"เหมาะกับคนที่ให้ความสำคัญกับประสิทธิภาพการเล่นเกม"}
 ];
+let current=[...products];
+function money(n){return "฿"+n.toLocaleString("th-TH")}
 function render(){
- document.getElementById("products").innerHTML=data.map((p,i)=>`
- <article class="card">
-   <div class="badge">${p.tag}</div>
-   <div class="product-img">${p.emoji}</div>
-   <h3>${p.name}</h3>
-   <div class="stars">⭐ ${p.score}/10</div>
-   <div class="price">${p.price}</div>
-   <div class="shop">${p.shop}</div>
-   <div class="compare"><span>${p.spec}</span><span class="good">${p.good}</span></div>
-   <button class="btn" onclick="alert('ต้นแบบ: เชื่อมต่อหน้าร้านได้ในขั้นถัดไป')">ดูรายละเอียด</button>
- </article>`).join("");
+let s=document.getElementById("sort").value;
+current=[...current].sort((a,b)=>s==="low"?a.price-b.price:s==="high"?b.price-a.price:b.score-a.score);
+document.getElementById("results").innerHTML=current.length?current.map(p=>`
+<article class="card"><div class="photo"><img src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/600x450?text=Product'"></div>
+<div class="body"><span class="tag">${p.cat}</span><h3>${p.name}</h3><div class="store">${p.store}</div><div class="price">${money(p.price)}</div><div class="score">⭐ ${p.score}/10</div><div class="why">${p.why}</div>
+<div class="buttons"><button class="compare" onclick="alert('เพิ่มตารางเปรียบเทียบสำหรับ ${p.name} ได้ในขั้นต่อไป')">เปรียบเทียบ</button><button class="shop" onclick="alert('ปุ่มร้านค้าเป็นเดโม — ขั้นต่อไปเชื่อมลิงก์ Affiliate จริง')">ดูร้าน</button></div></div></article>`).join(""):`<div class="empty">ไม่พบสินค้า ลองค้นหา “มือถือ” หรือ “หูฟัง”</div>`;
 }
-function fill(x){document.getElementById("query").value=x;search()}
 function search(){
- const q=document.getElementById("query").value.trim();
- document.getElementById("resultTitle").textContent=q?`ผลลัพธ์สำหรับ “${q}”`:"สินค้าที่น่าสนใจ";
- document.getElementById("aiText").innerHTML=q?
- `<strong>AI วิเคราะห์:</strong> จากเงื่อนไข “${q}” ระบบจะจัดอันดับโดยให้น้ำหนักกับราคา คะแนนรีวิว สเปก และความคุ้มค่า ข้อมูลในเดโมนี้เป็นผลจากการค้นหาสินค้าปัจจุบัน ไม่ใช่ข้อมูล Affiliate ของเรา`:
- `<strong>ตัวเลือกเด่น:</strong> Logitech G335 ราคา ฿1,290 เหมาะกับคนที่ต้องการหูฟังเกมมิ่งในงบประหยัด`;
+let q=document.getElementById("q").value.trim().toLowerCase();
+if(!q){current=[...products];document.getElementById("title").textContent="สินค้าแนะนำ";document.getElementById("aitext").textContent="พิมพ์สิ่งที่ต้องการเพื่อเริ่มค้นหา";render();return}
+let nums=q.match(/\d[\d,]*/g)?.map(x=>+x.replace(/,/g,""))||[];let budget=nums.length?Math.max(...nums):Infinity;
+current=products.filter(p=>{
+let words=q.split(/\s+/).filter(w=>w.length>1);let match=words.some(w=>(p.name+" "+p.cat+" "+p.tags).toLowerCase().includes(w));
+return match&&(budget===Infinity||p.price<=budget*1.1);
+});
+document.getElementById("title").textContent="ผลค้นหา: "+q;
+document.getElementById("aitext").textContent=current.length?`พบ ${current.length} ตัวเลือก ระบบเรียงตามคะแนนและราคาเพื่อช่วยให้ตัดสินใจง่ายขึ้น`:"ยังไม่พบตัวเลือกที่ตรงเงื่อนไข ลองเพิ่มงบหรือใช้คำค้นที่กว้างขึ้น";
+render();
 }
+function quick(x){document.getElementById("q").value=x;search()}
+document.getElementById("q").addEventListener("keydown",e=>{if(e.key==="Enter")search()});
 render();
 </script>
 </body>
