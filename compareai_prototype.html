@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CompareAI — ช้อปให้คุ้มกว่า</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f6f7fb;color:#111827}
+header{background:#fff;border-bottom:1px solid #e5e7eb;padding:16px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:22px;font-weight:800}.logo span{color:#6366f1}
+nav{display:flex;gap:22px;color:#6b7280;font-size:14px}
+.hero{padding:72px 6% 52px;text-align:center;background:linear-gradient(180deg,#fff,#f6f7fb)}
+.hero h1{font-size:clamp(34px,6vw,62px);margin:0 0 16px;letter-spacing:-2px}.hero h1 span{color:#6366f1}
+.hero p{color:#6b7280;font-size:18px;margin:0 auto 28px;max-width:650px}
+.search{max-width:760px;margin:auto;background:#fff;border:1px solid #dfe3ea;border-radius:18px;padding:8px;display:flex;box-shadow:0 12px 35px rgba(31,41,55,.08)}
+.search input{flex:1;border:0;outline:0;padding:16px;font-size:16px}.search button{border:0;background:#6366f1;color:white;border-radius:13px;padding:0 25px;font-weight:700;cursor:pointer}
+.chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}.chip{background:#fff;border:1px solid #e5e7eb;padding:8px 13px;border-radius:999px;font-size:13px;cursor:pointer}
+main{max-width:1180px;margin:0 auto;padding:35px 6% 70px}.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px}.section-title h2{margin:0;font-size:24px}.muted{color:#6b7280;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border:1px solid #e7e9ee;border-radius:18px;padding:18px;position:relative}.badge{position:absolute;top:15px;left:15px;background:#111827;color:#fff;padding:6px 9px;border-radius:8px;font-size:11px}.product-img{height:180px;border-radius:14px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:58px;margin-bottom:16px}.card h3{margin:0 0 7px;font-size:17px}.stars{font-size:13px;margin-bottom:12px}.price{font-size:25px;font-weight:800}.shop{font-size:12px;color:#6b7280;margin:3px 0 15px}.compare{display:flex;justify-content:space-between;border-top:1px solid #eee;padding-top:12px;font-size:13px}.good{color:#16a34a;font-weight:700}.btn{width:100%;margin-top:15px;padding:11px;border:0;border-radius:11px;background:#111827;color:#fff;font-weight:700;cursor:pointer}
+.ai{margin-top:35px;background:#111827;color:#fff;border-radius:22px;padding:26px}.ai h2{margin-top:0}.ai p{color:#d1d5db;line-height:1.7}.ai strong{color:#a5b4fc}
+footer{text-align:center;color:#9ca3af;padding:30px;font-size:13px}
+@media(max-width:800px){nav{display:none}.grid{grid-template-columns:1fr}.hero{padding-top:45px}.search{flex-direction:column}.search button{height:50px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Compare<span>AI</span></div>
+  <nav><span>เปรียบเทียบราคา</span><span>หมวดหมู่</span><span>วิธีใช้</span></nav>
+</header>
+
+<section class="hero">
+  <h1>ซื้อของให้ <span>คุ้มกว่า</span></h1>
+  <p>บอกสิ่งที่คุณกำลังหา แล้ว CompareAI ช่วยเปรียบเทียบราคา สเปก และความคุ้มค่าให้ในที่เดียว</p>
+  <div class="search">
+    <input id="query" placeholder="เช่น มือถือถ่ายรูปดี งบไม่เกิน 10,000 บาท">
+    <button onclick="search()">ค้นหา</button>
+  </div>
+  <div class="chips">
+    <button class="chip" onclick="fill('หูฟังเล่นเกม งบ 2,000 บาท')">🎧 หูฟังเกม</button>
+    <button class="chip" onclick="fill('มือถือ งบ 10,000 บาท')">📱 มือถือ</button>
+    <button class="chip" onclick="fill('โน้ตบุ๊ก งบ 25,000 บาท')">💻 โน้ตบุ๊ก</button>
+  </div>
+</section>
+
+<main>
+  <div class="section-title">
+    <div><h2 id="resultTitle">สินค้าที่น่าสนใจ</h2><div class="muted">ตัวอย่างข้อมูลสำหรับต้นแบบ</div></div>
+    <div class="muted">อัปเดตล่าสุด: วันนี้</div>
+  </div>
+
+  <div class="grid" id="products"></div>
+
+  <section class="ai">
+    <h2>🤖 AI ช่วยตัดสินใจ</h2>
+    <p id="aiText"><strong>ตัวเลือกที่คุ้มที่สุด:</strong> สินค้า A เพราะสมดุลระหว่างราคา คะแนนรีวิว และฟีเจอร์ได้ดีที่สุด หากไม่ได้ต้องการฟีเจอร์ระดับสูงสุด การเลือกตัวนี้จะประหยัดงบกว่า</p>
+  </section>
+</main>
+
+<footer>CompareAI Prototype • ระบบเปรียบเทียบสินค้าเวอร์ชันทดลอง</footer>
+
+<script>
+const data=[
+ {emoji:"🎧",name:"LOGITECH G335 Gaming Headset",price:"฿1,290",shop:"Makro PRO",score:"5.0",tag:"คุ้มงบ",spec:"หูฟังเกมมิ่ง • มีสาย",good:"เหมาะกับเกม"},
+ {emoji:"🎧",name:"Razer Kraken V3 X",price:"฿1,690",shop:"Gear Gadget Tech",score:"3.0",tag:"เกมมิ่ง",spec:"Gaming Headset • มีสาย",good:"งบกลาง"},
+ {emoji:"🎧",name:"Logitech G435 LIGHTSPEED",price:"฿1,770",shop:"Iris Technology",score:"5.0",tag:"ไร้สาย",spec:"Wireless • Bluetooth",good:"ใช้งานหลายแบบ"},
+ {emoji:"📱",name:"vivo Y11d (4+128GB)",price:"฿6,199",shop:"Banana Online",score:"—",tag:"มือถือ",spec:"4GB + 128GB",good:"งบไม่เกิน 10k"},
+ {emoji:"📱",name:"TECNO Spark 40 5G",price:"฿6,250",shop:"Shopee",score:"4.2",tag:"5G",spec:"8GB + 256GB",good:"คุ้มสเปก"},
+ {emoji:"📱",name:"TECNO POVA 7 5G",price:"฿7,080",shop:"SuperTstore",score:"4.7",tag:"เกม",spec:"5G • 8GB + 256GB",good:"เหมาะกับเกม"}
+];
+function render(){
+ document.getElementById("products").innerHTML=data.map((p,i)=>`
+ <article class="card">
+   <div class="badge">${p.tag}</div>
+   <div class="product-img">${p.emoji}</div>
+   <h3>${p.name}</h3>
+   <div class="stars">⭐ ${p.score}/10</div>
+   <div class="price">${p.price}</div>
+   <div class="shop">${p.shop}</div>
+   <div class="compare"><span>${p.spec}</span><span class="good">${p.good}</span></div>
+   <button class="btn" onclick="alert('ต้นแบบ: เชื่อมต่อหน้าร้านได้ในขั้นถัดไป')">ดูรายละเอียด</button>
+ </article>`).join("");
+}
+function fill(x){document.getElementById("query").value=x;search()}
+function search(){
+ const q=document.getElementById("query").value.trim();
+ document.getElementById("resultTitle").textContent=q?`ผลลัพธ์สำหรับ “${q}”`:"สินค้าที่น่าสนใจ";
+ document.getElementById("aiText").innerHTML=q?
+ `<strong>AI วิเคราะห์:</strong> จากเงื่อนไข “${q}” ระบบจะจัดอันดับโดยให้น้ำหนักกับราคา คะแนนรีวิว สเปก และความคุ้มค่า ข้อมูลในเดโมนี้เป็นผลจากการค้นหาสินค้าปัจจุบัน ไม่ใช่ข้อมูล Affiliate ของเรา`:
+ `<strong>ตัวเลือกเด่น:</strong> Logitech G335 ราคา ฿1,290 เหมาะกับคนที่ต้องการหูฟังเกมมิ่งในงบประหยัด`;
+}
+render();
+</script>
+</body>
+</html>
